@@ -1,0 +1,8 @@
+streamlit
+pandas
+plotly
+pyarrow
+s3fs
+boto3
+awswrangler
+dotenv
