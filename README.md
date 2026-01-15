@@ -62,6 +62,18 @@ NYC-TAXI-2025-S3-GLUE-ATHENA/
 │ └─ curated_nyc_taxi_yellow.sql
 ├─ data/
 │ └─ yellow_tripdata_2025-*.parquet
+├─ dashboard/
+│ ├─ app.py
+│ ├─ data.py
+│ ├─ logic.py
+│ ├─ charts/
+│ │ ├─ kpi.py
+│ │ ├─ trend.py
+│ │ ├─ topn.py
+│ │ └─ detail.py
+│ ├─ .streamlit/
+│ │ └─ config.toml
+│ └─ requirements.txt
 ├─ Glue/
 │ └─ Glue UI.png
 ├─ infra/
@@ -237,6 +249,39 @@ The design intentionally avoids Glue ETL and Spark clusters.
 These trade-offs are intentional and documented.
 
 ---
+
+## Streamlit Data Quality Dashboard (Local)
+
+The project includes a **local Streamlit dashboard** focused on **data quality validation** for NYC Taxi datasets processed via Athena.
+
+The dashboard is intentionally **not deployed** and is designed to support:
+- Data validation during development
+- Sanity checks on raw and curated datasets
+- Inspection of query outputs before downstream consumption
+
+### Data Quality Checks
+The dashboard surfaces:
+- Null rate analysis per column
+- Duplicate record detection
+- Row count comparisons (raw vs curated)
+- Basic schema-level consistency checks
+
+These checks are **read-only** and do not modify source or curated data.
+
+### Data Source
+The dashboard consumes:
+- Athena query results via AWS SDK (requires valid AWS credentials), or
+- Locally available query outputs for development/testing
+
+It does **not** perform ingestion, transformation, or orchestration.
+
+### Run Locally
+```bash
+pip install -r dashboard/requirements.txt
+streamlit run dashboard/app.py
+
+```
+
 
 ## Future Improvements
 
