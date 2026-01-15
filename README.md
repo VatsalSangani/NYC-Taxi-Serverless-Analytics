@@ -275,6 +275,8 @@ The dashboard consumes:
 
 It does **not** perform ingestion, transformation, or orchestration.
 
+Most checks are computed via SQL in Athena to leverage partition pruning and avoid large data transfers to the application layer.
+
 ### Run Locally
 ```bash
 pip install -r dashboard/requirements.txt
